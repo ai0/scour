@@ -3311,7 +3311,7 @@ def embed_rasters(element, options):
         ext = os.path.splitext(os.path.basename(href))[1].lower()[1:]
 
         # only operate on files with 'png', 'jpg', and 'gif' file extensions
-        if ext in ['png', 'jpg', 'gif']:
+        if ext in ['png', 'jpg', 'gif', 'svg']:
             # fix common issues with file paths
             #     TODO: should we warn the user instead of trying to correct those invalid URIs?
             # convert backslashes to slashes
@@ -3367,6 +3367,8 @@ def embed_rasters(element, options):
                     # JPEG has MIME Type 'image/jpeg'
                     if ext == 'jpg':
                         ext = 'jpeg'
+                    elif ext == 'svg':
+                        ext = 'svg+xml'
 
                     element.setAttributeNS(NS['XLINK'], 'href',
                                            'data:image/' + ext + ';base64,' + b64eRaster.decode())
